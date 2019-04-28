@@ -24,4 +24,8 @@ class AgencyService {
             return "La agencia no figura como recomendada"
         }
     }
+
+    def getLikedAgencies() {
+        return Agency.getAll()
+    }
 }

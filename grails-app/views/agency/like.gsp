@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: fede
-  Date: 28/04/19
-  Time: 16:52
---%>
-
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -12,6 +5,10 @@
 </head>
 
 <body>
+    <nav>
+        <g:link action="getLikedAgencies" controller="agency">Ver agencias recomendadas</g:link>
+    </nav>
+    <br>
     <h1>${result}</h1>
 </body>
 </html>

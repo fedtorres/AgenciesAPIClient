@@ -12,6 +12,10 @@
         <title>Index</title>
     </head>
     <body>
+        <nav>
+            <g:link action="getLikedAgencies" controller="agency">Ver agencias recomendadas</g:link>
+        </nav>
+        <br>
         <div class="agenciesForm">
             <g:form controller="agency" action="getAgencies">
                 <label>SiteId: </label>

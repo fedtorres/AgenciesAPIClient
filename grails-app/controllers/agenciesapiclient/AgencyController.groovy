@@ -16,7 +16,6 @@ class AgencyController {
     def getAgencies() {
 
         def urlString = "http://localhost:4567/agencias?siteId=" + params.siteId + "&paymentMethodId=" + params.paymentMethodId + "&nearTo=" + params.latitude + "," + params.longitude + "," + params.radius
-//        def urlString = "http://localhost:4567/agencias?siteId=MLA&paymentMethodId=rapipago&nearTo=-31.412971,-64.18758,300"
         def url = new URL(urlString)
         def connection = (HttpURLConnection) url.openConnection()
         connection.setRequestMethod("GET")
@@ -40,5 +39,11 @@ class AgencyController {
 
         def dislikeResult = agencyService.delete(params.agencyCode)
         [result: dislikeResult]
+    }
+
+    def getLikedAgencies() {
+
+        def likedAgenciesResult = agencyService.getLikedAgencies()
+        [result: likedAgenciesResult]
     }
 }
