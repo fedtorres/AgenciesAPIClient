@@ -7,14 +7,16 @@ import static org.springframework.http.HttpStatus.*
 
 class AgencyController {
 
+    def agencyService
+
     def index() {
 
     }
 
-    def consultar() {
-        //def urlString = "https://localhost:4567/agencias?siteId=" + params.siteId + "&paymentMethodId="
-        //+ params.paymentMethodId + "&nearTo=" + params.nearTo
-        def urlString = "http://localhost:4567/agencias?siteId=MLA&paymentMethodId=rapipago&nearTo=-31.412971,-64.18758,300"
+    def getAgencies() {
+
+        def urlString = "http://localhost:4567/agencias?siteId=" + params.siteId + "&paymentMethodId=" + params.paymentMethodId + "&nearTo=" + params.latitude + "," + params.longitude + "," + params.radius
+//        def urlString = "http://localhost:4567/agencias?siteId=MLA&paymentMethodId=rapipago&nearTo=-31.412971,-64.18758,300"
         def url = new URL(urlString)
         def connection = (HttpURLConnection) url.openConnection()
         connection.setRequestMethod("GET")
@@ -24,5 +26,19 @@ class AgencyController {
         def result = json.parse(connection.getInputStream())
         def resultList = result.data
         [agencies: resultList]
+    }
+
+    def like() {
+        def a = new Agency(addressLine: params.addressLine, city: params.city,
+                location: params.location, agencyCode: params.agencyCode,
+                description: params.description, distance: params.distance)
+        def likeResult = agencyService.save(a)
+        [result: likeResult]
+    }
+
+    def dislike() {
+
+        def dislikeResult = agencyService.delete(params.agencyCode)
+        [result: dislikeResult]
     }
 }

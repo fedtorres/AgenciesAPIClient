@@ -1,18 +1,27 @@
 package agenciesapiclient
 
-import grails.gorm.services.Service
+import grails.gorm.transactions.*
 
-@Service(Agency)
-interface AgencyService {
+@Transactional
+class AgencyService {
 
-    Agency get(Serializable id)
+    def save(agency) {
+        if(Agency.findByAgencyCode(agency.agencyCode) != null) {
+            return "La agencia ya está recomendada"
+        } else {
+            agency.save()
+            return "Agencia recomendada"
+        }
 
-    List<Agency> list(Map args)
+    }
 
-    Long count()
-
-    void delete(Serializable id)
-
-    Agency save(Agency agency)
-
+    def delete(agencyCode) {
+        def a = Agency.findByAgencyCode(agencyCode)
+        if(a != null) {
+            Agency.get(a.id).delete()
+            return "La agencia ya no está recomendada"
+        } else {
+            return "La agencia no figura como recomendada"
+        }
+    }
 }
