@@ -9,7 +9,7 @@
         padding: 20px;
     }
     </style>
-    <title>Consultar agencias</title>
+    <title>Agencias</title>
 </head>
 
 <body>
@@ -17,6 +17,8 @@
         <g:link action="getLikedAgencies" controller="agency">Ver agencias recomendadas</g:link>
     </nav>
     <br>
+    <h1>Agencias encontradas</h1>
+    <p>${result}</p>
     <g:each var="agency" in="${agencies}">
         <div class="agencies">
             <p>Dirección: ${agency.address.address_line}</p>

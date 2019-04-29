@@ -17,6 +17,7 @@
         </nav>
         <br>
         <div class="agenciesForm">
+            <h1>Consultar agencias</h1>
             <g:form controller="agency" action="getAgencies">
                 <label>SiteId: </label>
                 <g:textField name="siteId"/><br/>
@@ -28,6 +29,13 @@
                 <g:textField name="longitude"/><br/>
                 <label>Radio: </label>
                 <g:textField name="radius"/><br/>
+                <label>Limit: </label>
+                <g:textField name="limit"/><br/>
+                <label>Offset: </label>
+                <g:textField name="offset"/><br/>
+                <g:select name='sortingCriterion' noSelection="${['null':'Criterio de orden']}" value = "DISTANCE" from="${["ADDRESS_LINE", "AGENCY_CODE", "DISTANCE"]}">
+                </g:select><br/>
+                <br>
                 <g:submitButton name="getAgenciesButton" value="Consultar agencias" />
             </g:form>
         </div>
